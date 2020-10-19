@@ -1,21 +1,27 @@
 $(function () {
     var layer = layui.layer
     getData()
+    $('#btnLogout').on('click', function (e) {
+        console.log(1);
+        layer.confirm('确定退出登录', { icon: 3, title: '提示' }, function (index) {
+            localStorage.removeItem('token')
+            location.href = '/login.html'
+            layer.close(index)
+        })
+    })
 })
 function getData() {
     $.ajax({
         type: "get",
         url: "/my/userinfo",
-        headers: {
-            Authorization: localStorage.getItem('token') || ''
-        },
         success: function (response) {
             if (response.status !== 0) {
-                return layui.msg('获取用户失败')
+                return layui.layer.msg('获取用户失败')
             }
             console.log(response);
             renderAvatar(response.data)
         }
+
     });
 }
 function renderAvatar(user) {

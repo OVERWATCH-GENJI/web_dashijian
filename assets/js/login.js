@@ -58,7 +58,7 @@ $(function () {
                 layer.msg('登录成功')
                 //将登录的token添加到本地存储
                 localStorage.setItem('token', response.token)
-                location.href = '/index.html'
+                location.href = '/index2.html'
             }
         });
     })
